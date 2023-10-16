@@ -185,6 +185,8 @@ public class StudentManagement {
 
 			} else {
 				students[i] = x;
+				// new StudentRecord(x.id, x.name, x.phoneNumber, x.cgpa)
+				i++;
 			}
 		}
 	}
