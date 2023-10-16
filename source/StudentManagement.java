@@ -85,8 +85,9 @@ public class StudentManagement {
 			System.out.println("List is Empty");
 	}
 
-	public static void search() {
-		int flag = 0;
+	public static StudentRecord search() {
+		StudentRecord foundStudent = null;
+		// int flag = 0;
 		Scanner input = new Scanner(System.in);
 		System.out.println("Searching Record");
 		System.out.println("id: Search by ID\nname: Search by Name");
@@ -98,8 +99,9 @@ public class StudentManagement {
 			if (lastId >= 0) {
 				for (int i = 0; i <= lastId; i++) {
 					if (students[i].id.equals(searchPhrase)) {
-						students[i].showRecords();
-						flag = 1;
+						// students[i].showRecords();
+						foundStudent = students[i];
+						// flag = 1;
 					}
 				}
 			} else
@@ -111,8 +113,9 @@ public class StudentManagement {
 			if (lastId >= 0) {
 				for (int i = 0; i <= lastId; i++) {
 					if (students[i].name.equals(searchPhrase)) {
-						students[i].showRecords();
-						flag = 1;
+						// students[i].showRecords();
+						foundStudent = students[i];
+						// flag = 1;
 					}
 				}
 			} else
@@ -120,127 +123,69 @@ public class StudentManagement {
 		} else {
 			System.out.println("Wrong Input, please try again");
 		}
-		if (flag == 0) {
-			System.out.println("No Record Found");
-		}
+		// if (flag == 0) {
+		// System.out.println("No Record Found");
+		// }
+		return foundStudent;
+
 	}
 
 	public static void edit() {
-		System.out.println("Updating Record");
-		int flag = 0;
 		Scanner input = new Scanner(System.in);
-		System.out.println("id: Update by ID\nname: Update by Name");
-		System.out.print(">");
-		String choice = input.nextLine();
-		if (choice.equals("id")) {
-			System.out.print("ID:");
-			String searchPhrase = input.nextLine();
-			if (lastId >= 0) {
-				for (int i = 0; i <= lastId; i++) {
-					if (students[i].id.equals(searchPhrase)) {
-						System.out.println("Caution your change will be permanent\nLeave Blank to keep unchanged");
+		StudentRecord foundStudentRecord = search();
+		System.out.println("Caution your change will be permanent\nLeave Blank to keep unchanged");
 
-						System.out.println("Previous ID: " + students[i].id);
-						System.out.print("New ID: ");
-						String newId = input.nextLine();
-						if (newId.equals("")) {
-							System.out.println("ID left as it is");
-						} else {
-							students[0].id = newId;
-						}
-
-						System.out.println("Previous Name: " + students[i].name);
-						System.out.print("New Name: ");
-						String newName = input.nextLine();
-						if (newName.equals("")) {
-							System.out.println("Name left as it is");
-						} else {
-							students[0].name = newName;
-						}
-
-						System.out.println("Previous Phone Number: " + students[i].phoneNumber);
-						System.out.print("New Phone Number: ");
-						String newPhoneNumber = input.nextLine();
-						if (newPhoneNumber.equals("")) {
-							System.out.println("Phone Number left as it is");
-						} else {
-							students[0].phoneNumber = newPhoneNumber;
-						}
-
-						System.out.println("Previous CGPA: " + students[i].cgpa);
-						System.out.print("New CGPA: ");
-						String newCgpa = input.nextLine();
-						if (newCgpa.equals("")) {
-							System.out.println("CGPA left as it is");
-						} else {
-							students[0].cgpa = newCgpa;
-						}
-
-						flag = 1;
-					}
-				}
-			} else
-				System.out.println("List is Empty");
-
-		} else if (choice.equals("name")) {
-			System.out.print("Name:");
-			String searchPhrase = input.nextLine();
-			if (lastId >= 0) {
-				for (int i = 0; i <= lastId; i++) {
-					if (students[i].name.equals(searchPhrase)) {
-						students[i].showRecords();
-						flag = 1;
-					}
-				}
-			} else
-				System.out.println("List is Empty");
+		System.out.println("Previous ID: " + foundStudentRecord.id);
+		System.out.print("New ID: ");
+		String newId = input.nextLine();
+		if (newId.equals("")) {
+			System.out.println("ID left as it is");
 		} else {
-			System.out.println("Wrong Input, please try again");
+			foundStudentRecord.id = newId;
 		}
-		if (flag == 0) {
-			System.out.println("No Record Found");
+
+		System.out.println("Previous Name: " + foundStudentRecord.name);
+		System.out.print("New Name: ");
+		String newName = input.nextLine();
+		if (newName.equals("")) {
+			System.out.println("Name left as it is");
+		} else {
+			foundStudentRecord.name = newName;
+		}
+
+		System.out.println("Previous Phone Number: " + foundStudentRecord.phoneNumber);
+		System.out.print("New Phone Number: ");
+		String newPhoneNumber = input.nextLine();
+		if (newPhoneNumber.equals("")) {
+			System.out.println("Phone Number left as it is");
+		} else {
+			foundStudentRecord.phoneNumber = newPhoneNumber;
+		}
+
+		System.out.println("Previous CGPA: " + foundStudentRecord.cgpa);
+		System.out.print("New CGPA: ");
+		String newCgpa = input.nextLine();
+		if (newCgpa.equals("")) {
+			System.out.println("CGPA left as it is");
+		} else {
+			foundStudentRecord.cgpa = newCgpa;
 		}
 
 	}
 
 	public static void clear() {
-		System.out.println("Deleting Record");
-		int flag = 0;
-		Scanner input = new Scanner(System.in);
-		System.out.println("Searching Record");
-		System.out.println("id: Search by ID\nname: Search by Name");
-		System.out.print(">");
-		String choice = input.nextLine();
-		if (choice.equals("id")) {
-			System.out.print("ID:");
-			String searchPhrase = input.nextLine();
-			if (lastId >= 0) {
-				for (int i = 0; i <= lastId; i++) {
-					if (students[i].id.equals(searchPhrase)) {
-						students[i].showRecords();
-						flag = 1;
-					}
-				}
-			} else
-				System.out.println("List is Empty");
+		int i = 0;
+		StudentRecord foundStudentRecord = search();
+		StudentRecord[] tempStudents = students;
+		for (StudentRecord x : tempStudents) {
+			if (x == foundStudentRecord) {
+				System.out.println("Deleted Record");
+				x.showRecords();
+				lastId--;
 
-		} else if (choice.equals("name")) {
-			System.out.print("Name:");
-			String searchPhrase = input.nextLine();
-			if (lastId >= 0) {
-				for (int i = 0; i <= lastId; i++) {
-					if (students[i].name.equals(searchPhrase)) {
-						students[i].showRecords();
-						flag = 1;
-					}
-				}
-			} else
-				System.out.println("List is Empty");
-		} else {
-			System.out.println("Wrong Input, please try again");
-		}
-		if (flag == 0) {
-			System.out.println("No Record Found");
+			} else {
+				students[i] = x;
+			}
 		}
 	}
 
@@ -272,11 +217,19 @@ public class StudentManagement {
 			} else if (message.equals("new")) {
 				create();
 			} else if (message.equals("find")) {
-				search();
+				System.out.println("Searching for a student");
+				StudentRecord founStudentRecord = search();
+				if (founStudentRecord == null) {
+					System.out.println("Not Found");
+				} else {
+					founStudentRecord.showRecords();
+				}
 			} else if (message.equals("view")) {
 				show();
 			} else if (message.equals("update")) {
+				System.out.println("Updating Record");
 				edit();
+				//
 			} else if (message.equals("delete")) {
 				clear();
 			}
